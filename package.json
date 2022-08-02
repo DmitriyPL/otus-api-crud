@@ -1,7 +1,7 @@
 {
-  "name": "typescript_task",
+  "name": "otus-api-crud",
   "version": "1.0.0",
-  "description": "Typescript task",
+  "description": "otus-api-crud",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --open --config ./webpack.dev.conf.js",
@@ -16,12 +16,12 @@
   "author": "https://github.com/DmitriyPL",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DmitriyPL/otus-typescript-task.git"
+    "url": "git+https://github.com/DmitriyPL/otus-api-crud.git"
   },
   "bugs": {
-    "url": "https://github.com/DmitriyPL/otus-typescript-task/issues"
+    "url": "https://github.com/DmitriyPL/otus-api-crud/issues"
   },
-  "homepage": "https://github.com/DmitriyPL/otus-typescript-task#readme",
+  "homepage": "https://github.com/DmitriyPL/otus-api-crud#readme",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.18.5",
