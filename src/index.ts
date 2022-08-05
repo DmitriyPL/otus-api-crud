@@ -1,1 +1,3 @@
-// import { task1 } from "./ts/task1";
+import { main } from "./ts/api-calendar";
+
+main();
