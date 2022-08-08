@@ -80,9 +80,9 @@ module.exports = {
     alias: {
       "~": PATHS.src,
     },
-    fallback: {
-      "fs": false
-    },
+    // fallback: {
+    //   "fs": false,
+    // },
   },
 
   plugins: [
