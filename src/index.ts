@@ -1,6 +1,6 @@
 // import { main } from "./ts/api-calendar";
-import { main_jsondb } from "./ts/api-calendar-jsondb";
+import { mainFirebase } from "./ts/api-calendar-db";
 
 // main();
 
-main_jsondb();
+mainFirebase();
