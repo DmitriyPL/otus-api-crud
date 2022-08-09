@@ -27,6 +27,7 @@
     "@babel/core": "^7.18.5",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-typescript": "^7.18.6",
+    "@google-cloud/firestore": "^6.0.0",
     "@types/jest": "^28.1.2",
     "@types/lodash": "^4.14.182",
     "@types/react": "^18.0.15",
@@ -45,19 +46,20 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^26.5.3",
     "file-loader": "^6.2.0",
+    "firebase": "^9.9.2",
     "gh-pages": "^4.0.0",
     "html-loader": "^3.1.2",
     "html-webpack-plugin": "^5.5.0",
-    "husky": "^8.0.0",
+    "husky": "^8.0.1",
     "jest": "^28.1.1",
     "jest-canvas-mock": "^2.4.0",
     "jest-environment-jsdom": "^28.1.1",
     "lint-staged": "^13.0.2",
-    "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.6.1",
-    "node-json-db": "^2.0.0",
     "node-sass": "^7.0.1",
+    "path": "^0.12.7",
     "prettier": "^2.7.1",
+    "process": "^0.11.10",
     "pug": "^3.0.2",
     "pug-loader": "^1.0.2",
     "pug-plain-loader": "^1.1.0",
@@ -66,6 +68,7 @@
     "style-loader": "^3.3.1",
     "ts-loader": "^9.3.1",
     "typescript": "^4.7.4",
+    "util": "^0.12.4",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.2",
@@ -74,5 +77,9 @@
   "lint-staged": {
     "*.js": "eslint --fix",
     "*.{js,css,md}": "prettier --write"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "node-json-db": "^2.0.0"
   }
 }

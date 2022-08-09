@@ -1,9 +1,9 @@
 import { findIndex, filter, indexOf } from "lodash";
 
-interface Task {
+export interface Task {
   id: number;
   text: string;
-  date: Date;
+  date: string;
   status: "done" | "inprogress" | "paused" | "declare";
   tags: string[];
 }
@@ -72,30 +72,30 @@ export function dbInit(db: string) {
   localStorage.setItem(db, JSON.stringify([]));
 }
 
-async function readTask(db: string, id: number) {
-  const tasks = await readAllTasks(db);
-  return findTaskByID(tasks, id);
-}
-
-async function createTask(db: string, task: Task) {
+export async function createTask(db: string, task: Task) {
   const tasks = await readAllTasks(db);
   tasks.push(task);
   localStorage.setItem(db, JSON.stringify(tasks));
 }
 
-async function deleteTask(db: string, id: number) {
+export async function readTask(db: string, id: number) {
   const tasks = await readAllTasks(db);
-  const newTasks = deleteTaskByID(tasks, id);
-  localStorage.setItem(db, JSON.stringify(newTasks));
+  return findTaskByID(tasks, id);
 }
 
-async function updateTask(db: string, newTask: Task) {
+export async function updateTask(db: string, newTask: Task) {
   const tasks = await readAllTasks(db);
   const newTasks = updateTaskByID(tasks, newTask);
   localStorage.setItem(db, JSON.stringify(newTasks));
 }
 
-async function filterTasks(db: string, key: string, val: string[]) {
+export async function deleteTask(db: string, id: number) {
+  const tasks = await readAllTasks(db);
+  const newTasks = deleteTaskByID(tasks, id);
+  localStorage.setItem(db, JSON.stringify(newTasks));
+}
+
+export async function filterTasks(db: string, key: string, val: string[]) {
   const tasks = await readAllTasks(db);
   const res: Task[][] = [];
   switch (key) {
@@ -113,52 +113,20 @@ async function filterTasks(db: string, key: string, val: string[]) {
 }
 
 export async function main() {
+  const today = new Date();
+
   const task1: Task = {
     id: 1,
     text: "go to the shop",
-    date: new Date(),
+    date: today.toString(),
     status: "inprogress",
-    tags: ["mom", "shop"],
-  };
-
-  const task2: Task = {
-    id: 2,
-    text: "clean kitchen",
-    date: new Date(),
-    status: "paused",
-    tags: ["mom", "dad"],
-  };
-
-  const task3: Task = {
-    id: 3,
-    text: "buy new desk",
-    date: new Date(),
-    status: "done",
-    tags: ["dad", "bob"],
-  };
-
-  const task1_update: Task = {
-    id: 1,
-    text: "go to the shop",
-    date: new Date(),
-    status: "done",
     tags: ["mom", "shop"],
   };
 
   dbInit("tasks");
   console.log(localStorage["tasks"]);
   await createTask("tasks", task1);
-  console.log(await readTask("tasks", 1));
-  // await deleteTask('tasks', 1);
-  // console.log(localStorage['tasks']);
-  await updateTask("tasks", task1_update);
-  console.log(localStorage["tasks"]);
-
-  await createTask("tasks", task2);
-  await createTask("tasks", task3);
-
-  console.log(localStorage["tasks"]);
-
-  console.log(await filterTasks("tasks", "status", ["done", "paused"]));
-  console.log(await filterTasks("tasks", "tags", ["shop"]));
+  const task = await readTask("tasks", 1);
+  console.log(task);
+  console.log(task1);
 }

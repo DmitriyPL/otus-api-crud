@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require('webpack');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -80,9 +81,19 @@ module.exports = {
     alias: {
       "~": PATHS.src,
     },
+    fallback: {
+      "fs": false,
+      "path": false,
+      "os": false,
+    }
   },
 
   plugins: [
+
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
+
     new MiniCssExtractPlugin({
       filename: `[name].css`,
     }),
