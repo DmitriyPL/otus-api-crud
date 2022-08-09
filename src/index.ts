@@ -2,5 +2,4 @@
 // import { mainFirebase } from "./ts/api-calendar-db";
 
 // main();
-
 // mainFirebase();
