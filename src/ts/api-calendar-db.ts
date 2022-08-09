@@ -1,5 +1,9 @@
-import { findIndex, filter, indexOf } from "lodash";
-import { Firestore, setDoc, getDoc, doc, collection, Timestamp } from "firebase/firestore";
+import { Firestore, Timestamp, DocumentData } from "firebase/firestore";
+import { doc, collection } from "firebase/firestore";
+import { getDoc, getDocs, setDoc, deleteDoc } from "firebase/firestore";
+import { query, where} from "firebase/firestore";
+
+
 import { db } from './api-db-init';
 
 interface Task {
@@ -26,19 +30,34 @@ async function readTask(db: Firestore, id: string) {
   }
 }
 
-async function updateTask(db: Firestore, newTask: Task) {
-
+async function updateTask(db: Firestore, id: string, newTask: Task) {
+  const taskRef = doc(db, 'tasks', id);
+  await setDoc(taskRef, newTask);
 }
 
-async function deleteTask(db: Firestore, id: number) {
-
+async function deleteTask(db: Firestore, id: string) {
+  const taskRef = doc(db, 'tasks', id);
+  await deleteDoc(taskRef);
 }
 
 async function filterTasks(db: Firestore, key: string, val: string[]) {
 
+  const tasksCollectionRef = collection(db, "tasks");
+
+  let res : DocumentData[] = [];
+
+  const q = query( tasksCollectionRef, where(key, 'in', val) ); 
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    const task = doc.data(); 
+    res.push(task);
+  }); 
+
+  return res;
 }
 
 export async function mainFirebase() {
+  
   const task1: Task = {
     text: "go to the shop",
     date: Timestamp.fromDate(new Date()),
@@ -68,8 +87,19 @@ export async function mainFirebase() {
   };
 
   // await createTask(db, task1);
+  
   const task1_id : string = "aaEWSQxW8b68Ash08nYD";
+  
   console.log(await readTask(db, task1_id));
+
+  console.log(await filterTasks(db, 'status', ['done']));
+
+  // await updateTask(db, task1_id, task2);
+
+  // console.log(await readTask(db, task1_id));
+
+  // await deleteTask(db, task1_id);
+
   // console.log(localStorage["tasks"]);
   // await createTask("tasks", task1);
   // console.log(await readTask("tasks", 1));
